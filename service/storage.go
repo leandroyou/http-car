@@ -3,6 +3,8 @@ package service
 import (
 	"context"
 	"github.com/leandroyou/http-car/model/dao"
+	"github.com/leandroyou/http-car/observer/event"
+	"github.com/leandroyou/http-car/observer/subject"
 	"github.com/leandroyou/http-car/repository"
 )
 
@@ -10,10 +12,10 @@ type Storage struct {
 }
 
 func (Storage) CreateCar(ctx context.Context, car *dao.Car) error {
-	if err := GetService().ColdStorage.CreateCar(ctx, car); err != nil{
+	if err := GetService().ColdStorage.CreateCar(ctx, car); err != nil {
 		return err
 	}
-	go GetService().HotStorage.CreateCar(context.Background(), car)
+	go subject.Observers.Notify(event.Event{Car: *car})
 	return nil
 }
 
@@ -31,7 +33,7 @@ func (Storage) GetCar(ctx context.Context, id string) (dao.Car, error) {
 	}
 
 	coldCar, err := GetService().ColdStorage.GetCar(ctx, id)
-	if err == repository.ErrNoCar{
+	if err == repository.ErrNoCar {
 		return dao.Car{}, nil
 	}
 	if err != nil {
@@ -44,7 +46,7 @@ func (Storage) GetCar(ctx context.Context, id string) (dao.Car, error) {
 }
 
 func (Storage) DeleteCar(ctx context.Context, car dao.Car) error {
-	if err := GetService().ColdStorage.DeleteCar(ctx, car); err != nil{
+	if err := GetService().ColdStorage.DeleteCar(ctx, car); err != nil {
 		return err
 	}
 
@@ -54,7 +56,7 @@ func (Storage) DeleteCar(ctx context.Context, car dao.Car) error {
 }
 
 func (Storage) UpdateCar(ctx context.Context, car dao.Car) error {
-	if err := GetService().ColdStorage.UpdateCar(ctx, car); err != nil{
+	if err := GetService().ColdStorage.UpdateCar(ctx, car); err != nil {
 		return err
 	}
 

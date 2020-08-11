@@ -1,6 +1,8 @@
 package types
 
-import "github.com/leandroyou/http-car/singleton"
+import (
+	"github.com/leandroyou/http-car/singleton"
+)
 
 type APIkey string
 

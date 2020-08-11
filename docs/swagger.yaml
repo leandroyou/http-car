@@ -1,0 +1,49 @@
+definitions:
+  dao.Car:
+    properties:
+      id:
+        type: string
+      make:
+        type: string
+      model:
+        type: string
+    type: object
+host: localhost:8080/
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a simple http server
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Simple HTTTP Server
+  version: "1.0"
+paths:
+  /car/create:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new car when a dao.Car is given
+      parameters:
+      - description: Add car
+        in: body
+        name: car
+        required: true
+        schema:
+          $ref: '#/definitions/dao.Car'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dao.Car'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dao.Car'
+      summary: Create a car
+swagger: "2.0"

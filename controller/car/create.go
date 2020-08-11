@@ -9,6 +9,15 @@ import (
 	"net/http"
 )
 
+// CreateCar godoc
+// @Summary Create a car
+// @Description Creates a new car when a dao.Car is given
+// @Accept  json
+// @Produce  json
+// @Param car body dao.Car true "Add car"
+// @Success 200 {object} dao.Car
+// @Failure 500 {object} dao.Car
+// @Router /car/create [post]
 func init() {
 	http.Handle("/car/create", middleware.ProcessMiddleware(
 		http.HandlerFunc(CreateHandler),
@@ -28,7 +37,10 @@ func CreateHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		w.Header().Add("Content-Type", "application/json")
-		fmt.Fprintf(w, `{"Id":"%s"}`, newCar.Id)
+		if _, err := fmt.Fprintf(w, `{"Id":"%s"}`, newCar.Id); err != nil{
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
 		return
 	}
 

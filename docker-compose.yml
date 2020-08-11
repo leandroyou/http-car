@@ -5,6 +5,7 @@ services:
     build: .
     container_name: "http-car"
     image: "leandroyou/http-car"
+    command: -m mongodb -r redis
     ports:
       - 8080:8080
     links:
@@ -20,8 +21,8 @@ services:
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
-    #volumes:
-    #  - ./data/db:/data/db
+    volumes:
+      - /var/lib/boot2docker/my-mongodb-data/:/data/db/
     ports:
       - 27017:27017
 
@@ -33,3 +34,4 @@ services:
       - 6379:6379
     volumes:
       - ./dataRedis:/data
+

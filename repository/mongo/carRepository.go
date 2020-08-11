@@ -3,11 +3,11 @@ package mongo
 import (
 	"context"
 	"fmt"
+	"github.com/leandroyou/http-car/model/dao"
+	"github.com/leandroyou/http-car/repository"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
-	"github.com/leandroyou/http-car/model/dao"
-	"github.com/leandroyou/http-car/repository"
 )
 
 type CarRepository struct {
