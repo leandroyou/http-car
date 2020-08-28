@@ -4,10 +4,19 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/leandroyou/http-car/controller/route"
+	_ "github.com/leandroyou/http-car/model/dao"
 	"github.com/leandroyou/http-car/service"
 	"net/http"
 )
 
+// GetCars godoc
+// @Summary Get all cars
+// @Description Get all the cars
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} dao.Car
+// @Failure 500 {string} Error
+// @Router /car/get [get]
 func init() {
 	route.Routes.HandleFunc("/car/get", ListHandler)
 }

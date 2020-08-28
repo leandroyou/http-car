@@ -37,7 +37,7 @@ func CreateHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		w.Header().Add("Content-Type", "application/json")
-		if _, err := fmt.Fprintf(w, `{"Id":"%s"}`, newCar.Id); err != nil{
+		if _, err := fmt.Fprintf(w, `{"Id":"%s"}`, newCar.Id); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}

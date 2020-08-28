@@ -11,6 +11,15 @@ import (
 	"net/http"
 )
 
+// UpdateCar godoc
+// @Summary Updates a car
+// @Description Updates a car when a dao.Car is given
+// @Accept  json
+// @Produce  json
+// @Param car body dao.Car true "Update car"
+// @Success 200 {object} dao.Car
+// @Failure 500 {object} dao.Car
+// @Router /car/update [post]
 func init() {
 	http.Handle("/car/update", middleware.ProcessMiddleware(
 		http.HandlerFunc(UpdateHandler),

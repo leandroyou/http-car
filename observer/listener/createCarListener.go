@@ -16,7 +16,7 @@ func (e *EventObserverGoRoutine) NotifyCallback(event event.Event) {
 	//service.HotStorage.CreateCar(context.Background(), &event.Car)
 }
 
-func init(){
+func init() {
 	var goroutineObserver = EventObserverGoRoutine{Description: "goroutine observer"}
 	subject.Observers.AddListener(&goroutineObserver)
 }

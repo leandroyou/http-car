@@ -14,7 +14,7 @@ func (e *EventObserverLogs) NotifyCallback(event event.Event) {
 	fmt.Println("Car created: ", event.Car.Id)
 }
 
-func init(){
+func init() {
 	var logObserver = EventObserverLogs{Description: "Log observer"}
 	subject.Observers.AddListener(&logObserver)
 }

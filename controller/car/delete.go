@@ -11,6 +11,15 @@ import (
 	"net/http"
 )
 
+// DeleteCar godoc
+// @Summary Deletes a car
+// @Description Deletes a car when a dao.Car.Id is given
+// @Accept  json
+// @Produce  json
+// @Param car body dao.Car.Id true "Delete a car"
+// @Success 200 {string} Car deleted
+// @Failure 500 {string} Error
+// @Router /car/delete [post]
 func init() {
 	http.Handle("/car/delete", middleware.ProcessMiddleware(
 		http.HandlerFunc(DeleteHandler),
